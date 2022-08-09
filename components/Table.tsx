@@ -9,7 +9,7 @@ type Props = {
 const TableComponent = ({ headings, children }: Props) => {
   return (
     <TableContainer p={2}>
-      <Table variant="simple">
+      <Table>
         <Thead>
           <Tr>
             {headings.map((heading) => (
