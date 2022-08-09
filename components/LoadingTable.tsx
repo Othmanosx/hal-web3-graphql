@@ -1,9 +1,7 @@
 import { Tr, Td, Skeleton } from "@chakra-ui/react"
 import React from "react"
 
-type Props = {}
-
-const LoadingTable = (props: Props) => {
+const LoadingTable = () => {
   return (
     <>
       {[1, 2, 3, 4, 5].map((item) => (
