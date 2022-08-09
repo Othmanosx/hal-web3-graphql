@@ -41,7 +41,7 @@ const InfoCard = ({ pool }: Props) => {
           </Tr>
           <Tr>
             <Td>
-              {pool?.token0?.name === "NFT" ? "NFT" : pool?.token0?.symbol}
+              {pool?.token1?.name === "NFT" ? "NFT" : pool?.token1?.symbol}
             </Td>
             <Td>{formatNumber(pool?.token1?.totalValueLockedUSD)}</Td>
           </Tr>
