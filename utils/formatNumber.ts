@@ -1,7 +1,7 @@
 import BigNumber from "bignumber.js"
 
 export default function formatNumber(
-  num: number,
+  num: string = "0",
   decimals: number = 2
 ): string {
   const bigNumber = new BigNumber(num)

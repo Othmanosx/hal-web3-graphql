@@ -9,7 +9,7 @@ type Props = {
 
 const TableComponent = ({ headings, children, renderPagination }: Props) => {
   return (
-    <Box borderWidth="1px" borderRadius="lg">
+    <Box borderWidth="1px" borderRadius="lg" bgColor="rgb(25, 27, 31)">
       <TableContainer p={2}>
         <Table>
           <Thead>

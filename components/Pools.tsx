@@ -1,6 +1,6 @@
 import { Heading, Tbody, Td, Text, Tr } from "@chakra-ui/react"
 import type { NextPage } from "next"
-import { useQuery, gql } from "@apollo/client"
+import { useQuery } from "@apollo/client"
 import Table from "./Table"
 import { Pool } from "types"
 import { getPoolName } from "utils/getPoolName"
@@ -8,27 +8,8 @@ import usePagination from "utils/usePagination"
 import Pagination from "./Pagination"
 import LoadingTable from "./LoadingTable"
 import formatNumber from "utils/formatNumber"
-
-const GET_POOLS = gql`
-  query GetPools {
-    pools {
-      id
-      txCount
-      totalValueLockedUSD
-      volumeUSD
-      token0 {
-        id
-        name
-        symbol
-      }
-      token1 {
-        id
-        name
-        symbol
-      }
-    }
-  }
-`
+import Link from "next/link"
+import { GET_POOLS } from "graphqlQueries"
 
 const Home: NextPage = () => {
   const { loading, error, data } = useQuery(GET_POOLS)
@@ -37,8 +18,8 @@ const Home: NextPage = () => {
     10
   )
   const headings = ["#", "Pool", "TX Count", "TVL (USD)", "Volume (USD)"]
+  const isEmptyList = (currentData.length === 0 && !loading) || error
 
-  if (error) return <p>Error :(</p>
   return (
     <>
       <Heading as="h2" size="md" mt={10} mb={4}>
@@ -57,18 +38,34 @@ const Home: NextPage = () => {
       >
         <Tbody>
           {loading && <LoadingTable />}
-          {currentData.map((pool, index: number) => (
-            <Tr key={pool.id}>
-              <Td>{index + 1}</Td>
-              <Td>
-                <Text noOfLines={1} maxWidth={200}>
-                  {getPoolName(pool)}
+          {isEmptyList && (
+            <Tr>
+              <Td colSpan={headings.length}>
+                <Text p={5} textAlign="center" fontSize="lg">
+                  No pools found!
                 </Text>
               </Td>
-              <Td>{formatNumber(pool.txCount)}</Td>
-              <Td>${formatNumber(pool.totalValueLockedUSD)}</Td>
-              <Td>${formatNumber(pool.volumeUSD)}</Td>
             </Tr>
+          )}
+          {currentData.map((pool, index: number) => (
+            <Link key={pool.id} href={`/pools/${pool.id}`}>
+              <Tr>
+                <Td>{index + 1}</Td>
+                <Td>
+                  <Text
+                    title={getPoolName(pool)}
+                    sx={{ display: "block" }}
+                    noOfLines={1}
+                    maxWidth={100}
+                  >
+                    {getPoolName(pool)}
+                  </Text>
+                </Td>
+                <Td>{formatNumber(pool.txCount)}</Td>
+                <Td>${formatNumber(pool.totalValueLockedUSD)}</Td>
+                <Td>${formatNumber(pool.volumeUSD)}</Td>
+              </Tr>
+            </Link>
           ))}
         </Tbody>
       </Table>

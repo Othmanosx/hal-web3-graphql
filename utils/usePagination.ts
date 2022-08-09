@@ -3,6 +3,7 @@ import { useState } from "react"
 interface ReturnedData<T> {
   next: () => void
   prev: () => void
+  setPage: (page: number) => void
   currentData: T[]
   currentPage: number
   maxPage: number
@@ -24,7 +25,11 @@ function usePagination<T>(data: T[], itemsPerPage: number): ReturnedData<T> {
     setCurrentPage((currentPage) => Math.max(currentPage - 1, 1))
   }
 
-  return { next, prev, currentData, currentPage, maxPage }
+  function setPage(page: number) {
+    setCurrentPage(page)
+  }
+
+  return { next, prev, setPage, currentData, currentPage, maxPage }
 }
 
 export default usePagination
