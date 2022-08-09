@@ -6,7 +6,7 @@ type Props = {}
 const LoadingTable = (props: Props) => {
   return (
     <>
-      {[...new Array(5)].map((item) => (
+      {[1, 2, 3, 4, 5].map((item) => (
         <Tr key={item}>
           <Td>
             <Skeleton height="20px" />

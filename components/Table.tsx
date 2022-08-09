@@ -1,5 +1,13 @@
 import React from "react"
-import { TableContainer, Thead, Tr, Th, Table, Box } from "@chakra-ui/react"
+import {
+  TableContainer,
+  Thead,
+  Tr,
+  Th,
+  Table,
+  Box,
+  useColorModeValue,
+} from "@chakra-ui/react"
 
 type Props = {
   headings: string[]
@@ -8,8 +16,10 @@ type Props = {
 }
 
 const TableComponent = ({ headings, children, renderPagination }: Props) => {
+  const bg = useColorModeValue("white", "gray.900")
+
   return (
-    <Box borderWidth="1px" borderRadius="lg" bgColor="rgb(25, 27, 31)">
+    <Box borderWidth="1px" borderRadius="lg" bgColor={bg}>
       <TableContainer p={2}>
         <Table>
           <Thead>

@@ -11,11 +11,11 @@ interface ReturnedData<T> {
 
 function usePagination<T>(data: T[], itemsPerPage: number): ReturnedData<T> {
   const [currentPage, setCurrentPage] = useState(1)
-  const maxPage = Math.ceil(data.length / itemsPerPage)
+  const maxPage = Math.ceil(data?.length / itemsPerPage || 1)
 
   const begin = (currentPage - 1) * itemsPerPage
   const end = begin + itemsPerPage
-  const currentData = data.slice(begin, end)
+  const currentData = data?.slice(begin, end)
 
   function next() {
     setCurrentPage((currentPage) => Math.min(currentPage + 1, maxPage))

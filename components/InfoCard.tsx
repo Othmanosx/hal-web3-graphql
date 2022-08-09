@@ -6,6 +6,7 @@ import {
   Th,
   Tbody,
   Td,
+  useColorModeValue,
 } from "@chakra-ui/react"
 import React from "react"
 import { PoolDetails } from "types"
@@ -16,9 +17,10 @@ type Props = {
 }
 
 const InfoCard = ({ pool }: Props) => {
+  const bg = useColorModeValue("gray.50", "gray.900")
   return (
     <TableContainer
-      bg="gray.900"
+      bg={bg}
       borderWidth="1px"
       borderRadius="lg"
       maxWidth="450px"
@@ -32,11 +34,15 @@ const InfoCard = ({ pool }: Props) => {
         </Thead>
         <Tbody>
           <Tr>
-            <Td>{pool?.token0?.symbol}</Td>
+            <Td>
+              {pool?.token0?.name === "NFT" ? "NFT" : pool?.token0?.symbol}
+            </Td>
             <Td>{formatNumber(pool?.token0?.totalValueLockedUSD)}</Td>
           </Tr>
           <Tr>
-            <Td>{pool?.token1?.symbol}</Td>
+            <Td>
+              {pool?.token0?.name === "NFT" ? "NFT" : pool?.token0?.symbol}
+            </Td>
             <Td>{formatNumber(pool?.token1?.totalValueLockedUSD)}</Td>
           </Tr>
         </Tbody>
