@@ -1,8 +1,8 @@
-import "../styles/globals.css"
+import "styles/globals.css"
 import type { AppProps } from "next/app"
 import { ChakraProvider, Container } from "@chakra-ui/react"
 import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client"
-import theme from "../theme"
+import theme from "theme"
 
 function MyApp({ Component, pageProps }: AppProps) {
   const client = new ApolloClient({
